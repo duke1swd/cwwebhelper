@@ -1,0 +1,45 @@
+Notes on the CW web site database.
+
+Connect as DSN=postgresql;UID=yaws;PWD=159265
+Database is "chapelwood"
+
+Tables:
+
+
+                                     Table "public.address"
+  Column  |         Type          | Collation | Nullable |               Default
+----------+-----------------------+-----------+----------+--------------------------------------
+ aid      | integer               |           | not null | nextval('address_aid_seq'::regclass)
+ address1 | character varying(40) |           |          |
+ address2 | character varying(40) |           |          |
+ address3 | character varying(40) |           |          |
+ zip      | character varying(10) |           |          |
+ lline    | character varying(25) |           |          |
+
+
+Indexed by "aid" (address ID), this is the street address table.  lline is landline.
+lline is stored as 10 digits, with hyphens.
+
+
+
+                                    Table "public.email"
+ Column  |         Type          | Collation | Nullable |              Default
+---------+-----------------------+-----------+----------+------------------------------------
+ eid     | integer               |           | not null | nextval('email_eid_seq'::regclass)
+ aid     | integer               |           |          |
+ email   | character varying(40) |           |          |
+ passwd  | character varying(30) |           | not null |
+ validpw | boolean               |           |          |
+ owner   | boolean               |           |          |
+ admin   | boolean               |           |          |
+ listsrv | boolean               |           |          |
+ wwwsrv  | boolean               |           | not null | false
+ burpsrv | boolean               |           | not null | false
+
+This table appears to be not just email, but user, as it has the password.
+eid is the ID field
+
+
+Other tables not relevant:
+files
+
